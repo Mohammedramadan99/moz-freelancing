@@ -2,6 +2,9 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv'
 
+// import routes 
+import userRoute from './Routes/user.route.js'
+
 const app = express()
 
 // dotenv -  to load environment variables from .env file
@@ -18,6 +21,9 @@ const connect = async () => {
         console.log(err)
     }
 }
+
+// routes
+app.use('/api/user',userRoute)
 
 const PORT = process.env.PORT ? process.env.PORT : 8800
 app.listen(PORT,() => {
