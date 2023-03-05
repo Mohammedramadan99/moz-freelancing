@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv'
 
 // import routes 
+import authRoute from './Routes/auth.route.js'
 import userRoute from './Routes/user.route.js'
 
 const app = express()
@@ -23,6 +24,7 @@ const connect = async () => {
 }
 
 // routes
+app.use('/api/auth',authRoute)
 app.use('/api/user',userRoute)
 
 const PORT = process.env.PORT ? process.env.PORT : 8800
