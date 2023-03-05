@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 
 const app = express()
 
-// dotenv - to read .env file 
+// dotenv -  to load environment variables from .env file
 dotenv.config()
 
 // connect to DB
