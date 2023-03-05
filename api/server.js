@@ -24,6 +24,7 @@ const connect = async () => {
 }
 
 // routes
+app.use(express.json()) // IMP 
 app.use('/api/auth',authRoute)
 app.use('/api/user',userRoute)
 
