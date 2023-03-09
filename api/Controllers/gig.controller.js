@@ -47,3 +47,26 @@ export const getGig = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getGigs = async (req, res, next) => {
+  const q = req.query;
+  // filter
+  const filters = {
+    ...(q.userId && { userId: q.userId }),
+    ...(q.cat && { cat: q.cat }),
+    ...((q.min || q.max) && {
+      price: {
+        ...(q.min && { $gt: q.min }),
+        ...(q.max && { $lt: q.max }),
+      },
+    }),
+    ...(q.search && { title: { $regex: q.search, $options: "i" } }),
+  };
+  try {
+    // get all gigs
+    const gigs = await Gig.find(filters).sort({ [q.sort]: -1 });
+    res.status(200).send(gigs);
+  } catch (err) {
+    next(err);
+  }
+};

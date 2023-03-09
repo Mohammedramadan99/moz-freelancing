@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import authRoute from './Routes/auth.route.js'
 import userRoute from './Routes/user.route.js'
 import gigRoute from './Routes/gig.route.js'
+import reviewsRoute from './Routes/review.route.js'
 
 const app = express()
 
@@ -29,7 +30,9 @@ app.use(express.json()) // IMP
 app.use(cookieParser()) // IMP 
 app.use('/api/auth',authRoute)
 app.use('/api/user',userRoute)
-app.use('/api/gig',gigRoute)
+app.use('/api/gigs',gigRoute)
+app.use('/api/gigs',gigRoute)
+app.use('/api/reviews',reviewsRoute)
 
 // handling the errors - to send the errors to the user 
 app.use((err,rea,res,next) => {
