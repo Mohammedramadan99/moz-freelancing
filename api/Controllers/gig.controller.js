@@ -1,18 +1,6 @@
 import Gig from "../models/gig.model.js";
 import createError from "../utils/createError.js";
 
-export const allGigs = async (req, res, next) => {
-  // check if the user is a Seller
-  
-  try {
-    const gigs = await Gig.find({})
-    
-    res.status(201).json(gigs);
-  } catch (err) {
-    next(err);
-  }
-};
-
 export const createGig = async (req, res, next) => {
   // check if the user is a Seller
   if (!req.isSeller)
@@ -42,6 +30,19 @@ export const deleteGig = async (req, res, next) => {
     await Gig.findByIdAndDelete(req.params.id);
 
     res.status(200).send("Gig has been deleted!");
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getGig = async (req, res, next) => {
+  try {
+    // git the gig
+    const gig = await Gig.findById(req.params.id);
+    // check if there is no gig 
+    if (!gig) next(createError(404, "Gig not found!"));
+
+    res.status(200).send(gig);
   } catch (err) {
     next(err);
   }
