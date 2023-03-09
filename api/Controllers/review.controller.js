@@ -6,7 +6,7 @@ export const createReview = async (req, res, next) => {
   // 1. Add the review
   // 2. check if the user reviewed this gig before
   // 3. update the Gig
-  
+
   // check if the user is a seller
   if (req.isSeller)
     return next(createError(403, "Sellers can't create a review!"));
@@ -38,6 +38,16 @@ export const createReview = async (req, res, next) => {
       $inc: { totalStars: req.body.star, starNumber: 1 },
     });
     res.status(201).send(savedReview);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export const getReviews = async (req, res, next) => {
+  try {
+    // get reviews of a Gig
+    const reviews = await Review.find({ gigId: req.params.gigId });
+    res.status(200).send(reviews);
   } catch (err) {
     next(err);
   }
