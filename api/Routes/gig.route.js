@@ -1,6 +1,9 @@
 import express from "express";
 import {
-  createGig, deleteGig, getGig, getGigs
+  createGig,
+  deleteGig,
+  getGig,
+  getGigs,
 } from "../controllers/gig.controller.js";
 import { verifyToken } from "../middleware/jwt.js";
 
